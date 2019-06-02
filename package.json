@@ -1,15 +1,16 @@
 {
-  "name": "mandatory_backend",
-  "version": "1.0.0",
-  "description": "chat app labben",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "rsorianosanchis@gmail.com",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "socket.io": "^2.2.0"
-  }
+    "name": "mandatory_backend",
+    "version": "1.0.0",
+    "description": "chat app labben",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server/server.js"
+    },
+    "author": "rsorianosanchis@gmail.com",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^2.2.0"
+    }
 }
