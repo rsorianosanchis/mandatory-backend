@@ -1,7 +1,19 @@
 let socket = io();
 
+let params = new URLSearchParams(window.location.search);
+if (!params.has('name')) {
+    window.location = 'index.html';
+    throw new Error('Users name is necessary')
+
+}
+let user = {
+    name: params.get('name')
+}
+
+
 socket.on('connect', function() {
     console.log('Ansluted till Server');
+    socket.emit('loginChat', name)
 });
 
 // Höra
