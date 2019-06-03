@@ -24,6 +24,6 @@ server.listen(port, (err) => {
 
     if (err) throw new Error(err);
 
-    console.log(`Server sker i port ${ port }`);
+    console.log(`Server kör i port ${ port }`);
 
 });

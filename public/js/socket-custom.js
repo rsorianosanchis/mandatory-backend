@@ -1,28 +1,28 @@
 let socket = io();
 
 socket.on('connect', function() {
-    console.log('Conectado al servidor');
+    console.log('Ansluted till Server');
 });
 
-// escuchar
+// Höra
 socket.on('disconnect', function() {
 
-    console.log('Perdimos conexión con el servidor');
+    console.log('Man har förlorat servers anslutning');
 
 });
 
 
-// Enviar información
-socket.emit('enviarMensaje', {
-    usuario: 'Fernando',
-    mensaje: 'Hola Mundo'
+// Skicka info
+socket.emit('sendMessage', {
+    user: 'Ricardo',
+    msg: 'Hola Mundo'
 }, function(resp) {
-    console.log('respuesta server: ', resp);
+    console.log('response från server: ', resp);
 });
 
-// Escuchar información
-socket.on('enviarMensaje', function(mensaje) {
+// Höra info
+socket.on('sendMessage', function(msg) {
 
-    console.log('Servidor:', mensaje);
+    console.log('server:', msg);
 
 });
