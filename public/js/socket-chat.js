@@ -40,8 +40,16 @@ socket.emit('sendMessage', {
 });
 
 // Höra info
-socket.on('sendMessage', function(msg) {
+socket.on('createMsg', function(msg) {
 
     console.log('server:', msg);
+
+});
+
+//Höra users ändringar när user går in || går ut, från chaten
+
+socket.on('allOnlineUsersList', function(users) {
+
+    console.log(users);
 
 });
