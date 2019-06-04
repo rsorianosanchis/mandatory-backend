@@ -1,5 +1,6 @@
 const { io } = require('../server');
 const { Users } = require('../classes/users.js');
+const { createMsg } = require('../utils/utils.js')
 
 const users = new Users();
 
@@ -19,9 +20,14 @@ io.on('connection', (client) => {
         //list av alla personer broadcast
         client.broadcast.emit('allOnlineUsersList', users.getUsers());
     });
+    client.on('createMsg', (data) => {
+        let user = users.getUser(client.id);
+        let msg = createMsg(user.name, data.msg)
+        client.broadcast.emit('createMsg', msg)
+    })
     client.on('disconnect', () => {
         let deletedUser = users.deleteUser(client.id);
-        client.broadcast.emit('createMsg', { user: 'admin', msg: `${deletedUser.name} gick ut från chaten` });
+        client.broadcast.emit('createMsg', createMsg('admin', `${deletedUser.name} gick ut från chatten`));
         //list av alla personer broadcast
         client.broadcast.emit('allOnlineUsersList', users.getUsers());
     });

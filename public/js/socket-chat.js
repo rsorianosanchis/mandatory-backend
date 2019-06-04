@@ -32,12 +32,12 @@ socket.on('disconnect', function() {
 
 
 // Skicka info
-socket.emit('sendMessage', {
-    user: 'Ricardo',
-    msg: 'Hola Mundo'
-}, function(resp) {
-    console.log('response från server: ', resp);
-});
+// socket.emit('createMsg', {
+//     user: 'Ricardo',
+//     msg: 'Hola Mundo'
+// }, function(resp) {
+//     console.log('response från server: ', resp);
+// });
 
 // Höra info
 socket.on('createMsg', function(msg) {
