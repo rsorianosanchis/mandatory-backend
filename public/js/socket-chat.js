@@ -35,10 +35,12 @@ socket.on('disconnect', function() {
 // Skicka info
 // socket.emit('createMsg', {
 //     user: 'Ricardo',
-//     msg: 'Hola Mundo'
+//     msg: 'Hola Mundo',
+//     idDestination: 'xxxxxxxxxxxxxxxxxxxx' 
 // }, function(resp) {
 //     console.log('response från server: ', resp);
 // });
+
 
 // Höra info
 socket.on('createMsg', function(msg) {
@@ -55,7 +57,7 @@ socket.on('allOnlineUsersList', function(users) {
 
 });
 
-// private msg
+// klienten höra private msg
 socket.on('privateMsg', function(msg) {
     console.log('Private message:', msg);
 

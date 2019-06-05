@@ -35,9 +35,11 @@ io.on('connection', (client) => {
         //updatering onlinelista list av alla personer broadcast
         client.broadcast.emit('allOnlineUsersList', users.getUsers());
     });
-    //private msg
+    //private msg mellan klienter.Redirect msg till idDestination
     client.on('privateMsg', data => {
+        //sender som skickar msg
         let sender = users.getUser(client.id);
+        //
         client.broadcast.to(data.idDestination).emit('privateMsg', createMsg(sender.name, data.msg));
     });
 
