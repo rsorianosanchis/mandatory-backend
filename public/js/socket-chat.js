@@ -5,14 +5,15 @@ let socket = io();
 //
 let params = new URLSearchParams(window.location.search);
 //
-if (!params.has('name')) {
+if (!params.has('name') || (!params.has('rummet'))) {
     window.location = 'index.html';
-    throw new Error('Namn är et krav')
+    throw new Error('Namn och rummet är et krav')
 }
 //
-//man spara namn i variabel
+//man spara namn i variabel och nu rummet
 let user = {
-        name: params.get('name')
+        name: params.get('name'),
+        rummet: params.get('rummet')
     }
     /************************************************************/
 

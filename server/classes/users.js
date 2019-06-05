@@ -10,9 +10,9 @@ class Users {
             this.members = [];
         }
         //ladda en ny user
-    addUser(id, name) {
+    addUser(id, name, rummet) {
             // man skapar en ny chat member
-            let member = { id, name };
+            let member = { id, name, rummet };
             //man ladda i general list
             this.members.push(member);
             return this.members;

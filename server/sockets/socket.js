@@ -5,20 +5,32 @@ const { createMsg } = require('../utils/utils.js')
 const users = new Users();
 
 // måste fixa och undvika koppla flrra gånger när user updatera sidan
+//io.on('connection', är default connection rum
 io.on('connection', (client) => {
     //
     console.log('User is connected');
     //ny user loggin
     client.on('loginChat', (data, cb) => {
-        if (!data.name) {
-            return cb({ error: true, msg: 'the name is required' });
+        console.log(data);
+
+
+        if (!data.name) { //|| !data.rummet
+            return cb({
+                error: true,
+                msg: 'the name/rummet is required'
+            });
         }
+        /************************* */
+        /********rummet connection */
+        client.join(data.rummet);
+        /************************** */
         // om det finns ett ny namn returnerar i cb alla members
-        let members = users.addUser(client.id, data.name);
+        let members = users.addUser(client.id, data.name, data.rummet);
         cb(members);
         //
         //list av alla personer broadcast
-        client.broadcast.emit('allOnlineUsersList', users.getUsers());
+        // client.broadcast.emit('allOnlineUsersList', users.getUsers());
+        client.broadcast.to(data.idDestination).emit('allOnlineUsersList', users.getUsers());
     });
     //msg till alla
     client.on('createMsg', (data) => {
