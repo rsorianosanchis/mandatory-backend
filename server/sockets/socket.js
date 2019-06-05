@@ -6,9 +6,9 @@ const users = new Users();
 
 // måste fixa och undvika koppla flrra gånger när user updatera sidan
 io.on('connection', (client) => {
-
+    //
     console.log('User is connected');
-
+    //ny user loggin
     client.on('loginChat', (data, cb) => {
         if (!data.name) {
             return cb({ error: true, msg: 'the name is required' });
@@ -20,16 +20,25 @@ io.on('connection', (client) => {
         //list av alla personer broadcast
         client.broadcast.emit('allOnlineUsersList', users.getUsers());
     });
+    //msg till alla
     client.on('createMsg', (data) => {
         let user = users.getUser(client.id);
-        let msg = createMsg(user.name, data.msg)
-        client.broadcast.emit('createMsg', msg)
-    })
+        let msg = createMsg(user.name, data.msg);
+        client.broadcast.emit('createMsg', msg);
+    });
+    // user disconnect och list updatering
     client.on('disconnect', () => {
+        // vi spara user som gick ut för at kunna informera vem gick ut
         let deletedUser = users.deleteUser(client.id);
+        //admin informera till alla
         client.broadcast.emit('createMsg', createMsg('admin', `${deletedUser.name} gick ut från chatten`));
-        //list av alla personer broadcast
+        //updatering onlinelista list av alla personer broadcast
         client.broadcast.emit('allOnlineUsersList', users.getUsers());
+    });
+    //private msg
+    client.on('privateMsg', data => {
+        let sender = users.getUser(client.id);
+        client.broadcast.to(data.idDestination).emit('privateMsg', createMsg(sender.name, data.msg));
     });
 
 

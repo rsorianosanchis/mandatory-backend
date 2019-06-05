@@ -10,6 +10,7 @@ if (!params.has('name')) {
     throw new Error('Namn är et krav')
 }
 //
+//man spara namn i variabel
 let user = {
         name: params.get('name')
     }
@@ -53,3 +54,9 @@ socket.on('allOnlineUsersList', function(users) {
     console.log(users);
 
 });
+
+// private msg
+socket.on('privateMsg', function(msg) {
+    console.log('Private message:', msg);
+
+})
