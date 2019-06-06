@@ -3,22 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <!--meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Labb Chat</title>
 </head>
 
 <body>
-    <h1>Mandatory Chat</h1>
+    <!-- <h1>Mandatory Chat</h1>
 
     <form action="chat.html">
         <input type="text" name="name" placeholder="nick">
         <input type="text" name="rummet" placeholder="rummet">
         <button type="submit">Logga In</button>
-    </form>
+    </form> -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="loginform" action="chat.html">
+                        <h3 class="box-title m-b-20">Välkommen till Chatten</h3>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" required="" placeholder="Nick Name" name="name"> </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" placeholder="Inget rum ska betyder generellt rummet" name="rummet">
+                            </div>
+                        </div>
 
+                        <div class="form-group text-center">
+                            <div class="col-xs-12 p-b-20">
+                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
 
-
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>
