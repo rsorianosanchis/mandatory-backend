@@ -31,8 +31,13 @@ class Users {
             return this.members;
         }
         //hämta users från ett specifik rum
-    getUsersByRum(rum) {
-            //.............
+    getUsersByRum(rummet) {
+            let usersInRum = this.members.filter(member => {
+                if (rummet === member.rummet) {
+                    return member
+                }
+            })
+            return usersInRum;
         }
         // radera user
     deleteUser(id) {

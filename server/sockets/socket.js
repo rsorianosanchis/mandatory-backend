@@ -12,6 +12,7 @@ io.on('connection', (client) => {
     //ny user loggin
     client.on('loginChat', (data, cb) => {
         console.log(data);
+        console.log(cb);
 
 
         if (!data.name) { //|| !data.rummet
@@ -24,28 +25,32 @@ io.on('connection', (client) => {
         /********rummet connection */
         client.join(data.rummet);
         /************************** */
-        // om det finns ett ny namn returnerar i cb alla members
+        // om det finns ett ny namn returnerar i cb alla members (i rummet)
         let members = users.addUser(client.id, data.name, data.rummet);
-        cb(members);
         //
-        //list av alla personer broadcast
+        cb(users.getUsersByRum(data.rummet));
+        //
+        //list av alla personer broadcast (som är i rummet)
         // client.broadcast.emit('allOnlineUsersList', users.getUsers());
-        client.broadcast.to(data.idDestination).emit('allOnlineUsersList', users.getUsers());
+        client.broadcast.to(data.rummet).emit('allOnlineUsersList', users.getUsersByRum(data.rummet));
     });
     //msg till alla
     client.on('createMsg', (data) => {
         let user = users.getUser(client.id);
         let msg = createMsg(user.name, data.msg);
-        client.broadcast.emit('createMsg', msg);
+        //man kan få rummet igenom users sender data
+        client.broadcast.to(user.rummet).emit('createMsg', msg);
     });
     // user disconnect och list updatering
     client.on('disconnect', () => {
         // vi spara user som gick ut för at kunna informera vem gick ut
         let deletedUser = users.deleteUser(client.id);
         //admin informera till alla
-        client.broadcast.emit('createMsg', createMsg('admin', `${deletedUser.name} gick ut från chatten`));
+        client.broadcast.to(deletedUser.rummet).emit('createMsg', createMsg('admin', `${deletedUser.name} gick ut från chatten`));
         //updatering onlinelista list av alla personer broadcast
-        client.broadcast.emit('allOnlineUsersList', users.getUsers());
+        // client.broadcast.to(deletedUser.rummet).emit('allOnlineUsersList', users.getUsers());
+        //updatering onlinelista list av rummet personer broadcast
+        client.broadcast.to(deletedUser.rummet).emit('allOnlineUsersList', users.getUsersByRum(deletedUser.rummet));
     });
     //private msg mellan klienter.Redirect msg till idDestination
     client.on('privateMsg', data => {

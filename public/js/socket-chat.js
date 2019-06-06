@@ -16,9 +16,10 @@ let user = {
         rummet: params.get('rummet')
     }
     /************************************************************/
-
+    //man informerar till server vem och var är den ny användare
 socket.on('connect', function() {
     console.log('Ansluted till Server');
+    // om server accepteras det sker function callbak
     socket.emit('loginChat', user, function(resp) {
         console.log('Online Users', resp);
 
