@@ -33,6 +33,7 @@ io.on('connection', (client) => {
         //list av alla personer broadcast (som är i rummet)
         // client.broadcast.emit('allOnlineUsersList', users.getUsers());
         client.broadcast.to(data.rummet).emit('allOnlineUsersList', users.getUsersByRum(data.rummet));
+
     });
     //msg till alla
     client.on('createMsg', (data) => {

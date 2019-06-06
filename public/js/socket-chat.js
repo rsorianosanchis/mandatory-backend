@@ -22,7 +22,7 @@ socket.on('connect', function() {
     // om server accepteras det sker function callbak
     socket.emit('loginChat', user, function(resp) {
         console.log('Online Users', resp);
-
+        renderUsersOnline(resp);
     })
 });
 
@@ -56,6 +56,7 @@ socket.on('createMsg', function(msg) {
 socket.on('allOnlineUsersList', function(users) {
 
     console.log(users);
+    renderUsersOnline(users);
 
 });
 

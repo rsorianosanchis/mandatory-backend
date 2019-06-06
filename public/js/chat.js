@@ -1,5 +1,5 @@
 'use strict';
-let params = new URLSearchParams(window.location.search);
+//let params = new URLSearchParams(window.location.search);
 //
 let vOnlineUsersList = document.getElementById('onlineUsersList');
 
