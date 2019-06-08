@@ -2,7 +2,8 @@
 //let params = new URLSearchParams(window.location.search);
 //
 let vOnlineUsersList = document.getElementById('onlineUsersList');
-
+let vFormSendMsg = document.getElementById('formSendMsg');
+let vTxtMsg = document.getElementById('txtMsg');
 
 
 // funktioner för renderar users och få id igenom click
@@ -38,3 +39,13 @@ function renderUsersOnline(members) { //[]
 }
 
 //Listeners
+vFormSendMsg.addEventListener('submit', function(e) {
+    e.preventDefault();
+    console.log(vTxtMsg.value);
+    if (vTxtMsg.value.trim().length === 0) {
+        return;
+    }
+
+
+
+});
