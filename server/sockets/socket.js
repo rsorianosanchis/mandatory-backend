@@ -35,12 +35,16 @@ io.on('connection', (client) => {
         client.broadcast.to(data.rummet).emit('allOnlineUsersList', users.getUsersByRum(data.rummet));
 
     });
-    //msg till alla
-    client.on('createMsg', (data) => {
+    //listnar user medellande och redirect till destinationen
+    client.on('createMsg', (data, cb) => {
         let user = users.getUser(client.id);
         let msg = createMsg(user.name, data.msg);
         //man kan få rummet igenom users sender data
         client.broadcast.to(user.rummet).emit('createMsg', msg);
+        //
+        // response med samman data to sender för avisering allt gick bra
+        cb(msg)
+
     });
     // user disconnect och list updatering
     client.on('disconnect', () => {

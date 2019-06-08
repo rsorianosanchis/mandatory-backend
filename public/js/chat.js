@@ -4,6 +4,7 @@
 let vOnlineUsersList = document.getElementById('onlineUsersList');
 let vFormSendMsg = document.getElementById('formSendMsg');
 let vTxtMsg = document.getElementById('txtMsg');
+let vChatBox = document.getElementById('chatBox');
 
 
 // funktioner för renderar users och få id igenom click
@@ -38,13 +39,43 @@ function renderUsersOnline(members) { //[]
     }
 }
 
+function renderMsg(msgData) {
+    // l//et htmlii = '';
+    //htmlii += '<li>';
+
+    //htmlii += '</li>';
+
+    // html = `<!--chat msg -->
+    //             <li>
+    //                 <div class="chat-content">
+    //                     <h5>${msgData.name}</h5>
+    //                     <div><p>${msgData.msg}</p></div>
+    //                 </div>
+    //                 <div class="chat-time">10:56 am</div>
+    //              </li>`;
+    vChatBox.innerHTML += `<li><p>${msgData.msg}</p></li>`;
+};
+
 //Listeners
 vFormSendMsg.addEventListener('submit', function(e) {
     e.preventDefault();
     console.log(vTxtMsg.value);
-    if (vTxtMsg.value.trim().length === 0) {
+    let msg = vTxtMsg.value;
+    // man undvika skicka tom medelande
+    if (msg.trim().length === 0) {
         return;
     }
+    //Skicka medelande
+    socket.emit('createMsg', {
+        user: `${params.get('name')}`,
+        msg: msg,
+    }, function(resp) {
+        console.log('response från server: ', resp);
+        //cleaning text area
+        vTxtMsg.value = '';
+        vTxtMsg.autofocus = true; // går inte ???;
+        renderMsg(resp)
+    });
 
 
 
