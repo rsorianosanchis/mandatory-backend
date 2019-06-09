@@ -33,6 +33,7 @@ io.on('connection', (client) => {
         //list av alla personer broadcast (som är i rummet)
         // client.broadcast.emit('allOnlineUsersList', users.getUsers());
         client.broadcast.to(data.rummet).emit('allOnlineUsersList', users.getUsersByRum(data.rummet));
+        client.broadcast.to(data.rummet).emit('createMsg', createMsg('admin', `${data.name} gick in i rummet`));
 
     });
     //listnar user medellande och redirect till destinationen
@@ -42,6 +43,7 @@ io.on('connection', (client) => {
         //man kan få rummet igenom users sender data
         client.broadcast.to(user.rummet).emit('createMsg', msg);
         //
+
         // response med samman data to sender för avisering allt gick bra
         cb(msg)
 

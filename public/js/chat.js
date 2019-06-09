@@ -43,7 +43,7 @@ function renderUsersOnline(members) { //[]
 function renderMsg(msgData, jag) {
     let msgHtml = '';
     let date = new Date(msgData.date);
-    let clock = `${date.getHours()}:${date.getMinutes()}-- ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`;
+    let clock = `${date.getHours()}:${date.getMinutes()<=9?0:''}${date.getMinutes()} -- ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`;
 
 
 
