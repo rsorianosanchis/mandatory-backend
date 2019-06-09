@@ -12,17 +12,18 @@ function renderUsersOnline(members) { //[]
     //vOnlineUsersList.innerHTML = '';
     console.log(members);
     let html = '';
-    html += '<li>';
-    html += `<span><strong> Rummet: ${(params.get('rummet')!==''
-        ?params.get('rummet')
-        :'Generellt')}</strong> </span>`;
-    html += '</li>';
+    html += `<li>
+            <span><strong> Rummet: ${(params.get('rummet')!==''
+            ?params.get('rummet')
+            :'Generellt')}</strong> </span>
+        </li>`;
     //
     for (let i = 0; i < members.length; i++) {
-        html += `<li>`;
-        html += `<a data-id="${ members[i].id }"
-        ><span>${members[i].name}</span ></a>`;
-        html += `</li>`;
+
+        html += `<li>
+            <a data-id="${ members[i].id }"
+            ><span>${members[i].name}</span ></a>
+        </li>`;
     }
     vOnlineUsersList.innerHTML = html;
     //
@@ -40,20 +41,18 @@ function renderUsersOnline(members) { //[]
 }
 
 function renderMsg(msgData) {
-    // l//et htmlii = '';
-    //htmlii += '<li>';
+    let msgHtml = '';
 
-    //htmlii += '</li>';
+    msgHtml = `<!--chat msg -->
+                <li>
+                    <div class="chat-content">
+                        <h5>${msgData.name}</h5>
+                        <div><p>${msgData.msg}</p></div>
+                    </div>
+                    <div class="chat-time">10:56 am</div>
+                 </li>`;
 
-    // html = `<!--chat msg -->
-    //             <li>
-    //                 <div class="chat-content">
-    //                     <h5>${msgData.name}</h5>
-    //                     <div><p>${msgData.msg}</p></div>
-    //                 </div>
-    //                 <div class="chat-time">10:56 am</div>
-    //              </li>`;
-    vChatBox.innerHTML += `<li><p>${msgData.msg}</p></li>`;
+    vChatBox.innerHTML += msgHtml;
 };
 
 //Listeners
