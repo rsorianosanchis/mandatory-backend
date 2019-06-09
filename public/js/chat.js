@@ -1,10 +1,12 @@
-'use strict';
 //let params = new URLSearchParams(window.location.search);
 //
 let vOnlineUsersList = document.getElementById('onlineUsersList');
 let vFormSendMsg = document.getElementById('formSendMsg');
 let vTxtMsg = document.getElementById('txtMsg');
 let vChatBox = document.getElementById('chatBox');
+//const saveMsg = require('.../server/basedata/basedata.js');
+
+
 
 
 // funktioner för renderar users och få id igenom click
@@ -42,6 +44,7 @@ function renderUsersOnline(members) { //[]
 
 function renderMsg(msgData, jag) {
     let msgHtml = '';
+    let activaRum = params.get('rummet');
     let date = new Date(msgData.date);
     let clock = `${date.getHours()}:${date.getMinutes()<=9?0:''}${date.getMinutes()} -- ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`;
 
@@ -62,20 +65,22 @@ function renderMsg(msgData, jag) {
                             <div class="">${clock}</div>
                         </div>
                      </li>`;
-    // } else {
-
-    //     msgHtml = `<!--chat msg -->
-    //             <li>
-    //                 <div class="andra">
-    //                     <h5>${msgData.name}</h5>
-    //                     <div><p>${msgData.msg}</p></div>
-    //                     <div class="">${clock}</div>
-    //                 </div>
-    //              </li>`;
-    // }
 
     vChatBox.innerHTML += msgHtml;
+
+    console.log(msgData);
+    //name, msg, rummet, date
     /*********ladda up i DB *************/
+    let newItem = {
+        name: msgData.name,
+        rummet: activaRum,
+        msg: msgData.msg,
+        date: clock
+    };
+    //saveMsg.createNewItem(newItem);
+    //createNewItem(newItem);
+    console.log(newItem);
+
 };
 
 //Listeners
