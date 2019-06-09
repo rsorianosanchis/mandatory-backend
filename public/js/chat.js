@@ -40,19 +40,42 @@ function renderUsersOnline(members) { //[]
     }
 }
 
-function renderMsg(msgData) {
+function renderMsg(msgData, jag) {
     let msgHtml = '';
+    let date = new Date(msgData.date);
+    let clock = `${date.getHours()}:${date.getMinutes()}-- ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`;
+
+
+
+    // if (jag) {
 
     msgHtml = `<!--chat msg -->
-                <li>
-                    <div class="chat-content">
-                        <h5>${msgData.name}</h5>
-                        <div><p>${msgData.msg}</p></div>
-                    </div>
-                    <div class="chat-time">10:56 am</div>
-                 </li>`;
+                    <li>
+                        <div class="${jag
+                            ?'jagClass'
+                            :msgData.name=== 'admin'
+                                ?'adminClass'
+                                :'andraClass'
+                                }">
+                            <h5>${msgData.name}</h5>
+                            <div><p>${msgData.msg}</p></div>
+                            <div class="">${clock}</div>
+                        </div>
+                     </li>`;
+    // } else {
+
+    //     msgHtml = `<!--chat msg -->
+    //             <li>
+    //                 <div class="andra">
+    //                     <h5>${msgData.name}</h5>
+    //                     <div><p>${msgData.msg}</p></div>
+    //                     <div class="">${clock}</div>
+    //                 </div>
+    //              </li>`;
+    // }
 
     vChatBox.innerHTML += msgHtml;
+    /*********ladda up i DB *************/
 };
 
 //Listeners
@@ -73,7 +96,7 @@ vFormSendMsg.addEventListener('submit', function(e) {
         //cleaning text area
         vTxtMsg.value = '';
         vTxtMsg.autofocus = true; // går inte ???;
-        renderMsg(resp)
+        renderMsg(resp, true)
     });
 
 

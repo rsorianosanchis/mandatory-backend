@@ -48,6 +48,7 @@ socket.on('disconnect', function() {
 socket.on('createMsg', function(msg) {
 
     console.log('server:', msg);
+    renderMsg(msg, false);
 
 });
 
