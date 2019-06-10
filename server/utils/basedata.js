@@ -1,12 +1,13 @@
 const fs = require('fs');
+//const test = require('../basedata/basedata.json')
 
 let msgList = [];
 
-const saveDataBase = (newItem) => {
-    let dataJson = JSON.stringify(newItem);
-    console.log(dataJson);
+const saveDataBase = () => {
+    let tillJson = JSON.stringify(msgList);
+    console.log(tillJson);
 
-    // fs.writeFile('./basedata/test.json', dataJson, (err) => {
+    // fs.writeFile('../minnet/minnet.json', tillJson, (err) => {
     //     if (err) {
     //         throw new Error('det kunde inte spara i persistent minnet', err)
     //     }
@@ -17,10 +18,8 @@ const saveDataBase = (newItem) => {
 const createNewItem = (dataIn) => {
     msgList.push(dataIn);
     console.log(msgList);
-
+    saveDataBase();
     // man gör ett return för att ha ett potentialla respons 
-
-
     return msgList;
 }
 

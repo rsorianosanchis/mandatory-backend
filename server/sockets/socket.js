@@ -67,11 +67,7 @@ io.on('connection', (client) => {
         //
         console.log(newItem);
         //
-        let transfer = saveData.createNewItem(newItem);
-        saveData.saveDataBase(transfer);
-        // setInterval(() => {
-        //     saveData.saveDataBase(transfer);
-        // }, 3000);
+        saveData.createNewItem(newItem);
 
 
 
