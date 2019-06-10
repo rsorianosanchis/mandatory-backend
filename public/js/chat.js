@@ -95,6 +95,7 @@ vFormSendMsg.addEventListener('submit', function(e) {
     //Skicka medelande
     socket.emit('createMsg', {
         user: `${params.get('name')}`,
+        rummet: `${params.get('rummet')}`,
         msg: msg,
     }, function(resp) {
         console.log('response från server: ', resp);

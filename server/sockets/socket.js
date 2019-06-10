@@ -46,6 +46,24 @@ io.on('connection', (client) => {
 
         // response med samman data to sender för avisering allt gick bra
         cb(msg)
+        console.log(msg);
+        console.log(data);
+
+
+        /************************** */
+        //här ska vi skapa json file
+        /************************** */
+        let newItem = {
+            name: data.user,
+            rummet: data.rummet,
+            msg: data.msg,
+            date: msg.date,
+            id: user.id
+        };
+        console.log(user);
+
+        console.log(newItem);
+
 
     });
     // user disconnect och list updatering
