@@ -1,7 +1,7 @@
 const { io } = require('../server');
 const { Users } = require('../classes/users.js');
 const { createMsg } = require('../utils/utils.js');
-const saveData = require('../basedata/basedata.js');
+const saveData = require('../utils/basedata.js');
 
 
 const users = new Users();
@@ -20,7 +20,7 @@ io.on('connection', (client) => {
         if (!data.name) { //|| !data.rummet
             return cb({
                 error: true,
-                msg: 'the name/rummet is required'
+                msg: 'the name is required'
             });
         }
         console.log('test test test test');
@@ -55,7 +55,7 @@ io.on('connection', (client) => {
 
 
         /************************** */
-        //här ska vi skapa json file
+        //här ska vi förbereda att skapa json file
         /************************** */
         let newItem = {
             name: data.user,
@@ -64,10 +64,15 @@ io.on('connection', (client) => {
             date: msg.date,
             id: user.id
         };
-        console.log(user);
-
+        //
         console.log(newItem);
-        saveData.createNewItem(newItem);
+        //
+        let transfer = saveData.createNewItem(newItem);
+        saveData.saveDataBase(transfer);
+        // setInterval(() => {
+        //     saveData.saveDataBase(transfer);
+        // }, 3000);
+
 
 
     });
