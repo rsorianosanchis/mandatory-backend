@@ -1,6 +1,8 @@
 const { io } = require('../server');
 const { Users } = require('../classes/users.js');
-const { createMsg } = require('../utils/utils.js')
+const { createMsg } = require('../utils/utils.js');
+const saveData = require('../basedata/basedata.js');
+
 
 const users = new Users();
 
@@ -63,6 +65,7 @@ io.on('connection', (client) => {
         console.log(user);
 
         console.log(newItem);
+        saveData.createNewItem(newItem);
 
 
     });

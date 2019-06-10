@@ -4,7 +4,6 @@ let vOnlineUsersList = document.getElementById('onlineUsersList');
 let vFormSendMsg = document.getElementById('formSendMsg');
 let vTxtMsg = document.getElementById('txtMsg');
 let vChatBox = document.getElementById('chatBox');
-//const saveMsg = require('.../server/basedata/basedata.js');
 
 
 
