@@ -23,6 +23,8 @@ io.on('connection', (client) => {
                 msg: 'the name/rummet is required'
             });
         }
+        console.log('test test test test');
+
         /************************* */
         /********rummet connection */
         client.join(data.rummet);
