@@ -41,6 +41,33 @@ function renderUsersOnline(members) { //[]
     }
 }
 
+// function renderHistoric(data, Id, rummet) {
+//     let msgHtml = '';
+//     //
+//     for (let i = 0; i < members.length; i++) {
+
+
+//     }
+
+
+
+//     msgHtml = `<!--chat msg -->
+//                     <li>
+//                         <div class="${jag
+//                             ?'jagClass'
+//                             :msgData.name=== 'admin'
+//                                 ?'adminClass'
+//                                 :'andraClass'
+//                                 }">
+//                             <h5>${msgData.name}</h5>
+//                             <div><p>${msgData.msg}</p></div>
+//                             <div class="">${clock}</div>
+//                         </div>
+//                      </li>`;
+
+//     vChatBox.innerHTML += msgHtml;
+// }
+
 function renderMsg(msgData, jag) {
     let msgHtml = '';
     let activaRum = params.get('rummet');
@@ -103,6 +130,7 @@ vFormSendMsg.addEventListener('submit', function(e) {
         vTxtMsg.autofocus = true; // går inte ???;
         renderMsg(resp, true)
     });
+    e.stopPropagation()
 
 
 

@@ -6,4 +6,6 @@ const createMsg = (name, msg) => {
     }
 }
 
-module.exports = { createMsg }
+const createHistoric =
+
+    module.exports = { createMsg }

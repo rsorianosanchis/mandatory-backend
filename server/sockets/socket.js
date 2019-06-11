@@ -1,12 +1,13 @@
 const { io } = require('../server');
 const { Users } = require('../classes/users.js');
 const { createMsg } = require('../utils/utils.js');
-const saveData = require('../utils/basedata.js');
+const { createNewItem } = require('../utils/basedata.js');
+
+
+
 
 
 const users = new Users();
-
-// måste fixa och undvika koppla flrra gånger när user updatera sidan
 //io.on('connection', är default connection rum
 io.on('connection', (client) => {
     //
@@ -15,6 +16,7 @@ io.on('connection', (client) => {
     client.on('loginChat', (data, cb) => {
         console.log(data);
         console.log(cb);
+        let hist = require('../minnet/minnet.json');
 
 
         if (!data.name) { //|| !data.rummet
@@ -23,21 +25,26 @@ io.on('connection', (client) => {
                 msg: 'the name is required'
             });
         }
-        console.log('test test test test');
-
+        console.log('connection *******************************************');
         /************************* */
         /********rummet connection */
         client.join(data.rummet);
         /************************** */
         // om det finns ett ny namn returnerar i cb alla members (i rummet)
         let members = users.addUser(client.id, data.name, data.rummet);
+        console.log(members);
+
+
         //
         cb(users.getUsersByRum(data.rummet));
         //
         //list av alla personer broadcast (som är i rummet)
         // client.broadcast.emit('allOnlineUsersList', users.getUsers());
         client.broadcast.to(data.rummet).emit('allOnlineUsersList', users.getUsersByRum(data.rummet));
-        client.broadcast.to(data.rummet).emit('createMsg', createMsg('admin', `${data.name} gick in i rummet`));
+        client.broadcast.to(data.rummet).emit('createMsg', createMsg('admin', `<strong>${data.name}</strong> gick in i rummet`));
+        //
+
+        client.broadcast.to(data.rummet).emit('historic', { nyClient: client.id, historic: hist });
 
     });
     //listnar user medellande och redirect till destinationen
@@ -67,7 +74,7 @@ io.on('connection', (client) => {
         //
         console.log(newItem);
         //
-        saveData.createNewItem(newItem);
+        createNewItem(newItem);
 
 
 

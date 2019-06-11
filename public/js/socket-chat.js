@@ -4,6 +4,7 @@ let socket = io();
 //http://localhost:3000/chat.html?name=Lola
 //
 let params = new URLSearchParams(window.location.search);
+let tempId = '';
 //
 if (!params.has('name') || (!params.has('rummet'))) {
     window.location = 'index.html';
@@ -21,9 +22,19 @@ socket.on('connect', function() {
     console.log('Ansluted till Server');
     // om server accepteras det sker function callbak
     socket.emit('loginChat', user, function(resp) {
+        console.log(user);
         console.log('Online Users', resp);
+        console.log(resp);
         renderUsersOnline(resp);
+        //
+        //
+        tempId = resp[resp.length - 1].id;
+        console.log(tempId);
+
+
     })
+
+    //renderHistoric();
 });
 
 // koppla av
@@ -60,9 +71,24 @@ socket.on('allOnlineUsersList', function(users) {
     renderUsersOnline(users);
 
 });
+socket.on('historic', function(historic) {
+    console.log(historic.nyClient);
+    console.log(tempId);
+
+    console.log(historic.historic);
+    let hist = historic.historic;
+    let rummet = params.get('rummet');
+    console.log(hist);
+    console.log(rummet);
+    if (historic.nyClient === tempId) {
+        let filtRum = hist.filter(item => {
+            if (item.rummet === rummet) {
+                return item
+            }
+        })
+        console.log(filtRum);
+    }
+    //let newArr = historic.
+})
 
 // klienten höra private msg
-socket.on('privateMsg', function(msg) {
-    console.log('Private message:', msg);
-
-})
